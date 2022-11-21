@@ -11,9 +11,9 @@ commands:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: ./gradlew clean build
       - save_cache:
           paths:
@@ -28,10 +28,9 @@ commands:
       # run apiDiff task
       - run: ./gradlew apiDiff
       - store_artifacts:
-         path: lib/build/reports/apiDiff/apiDiff.txt
+          path: lib/build/reports/apiDiff/apiDiff.txt
       - store_artifacts:
-         path: lib/build/reports/apiDiff/apiDiff.html
-
+          path: lib/build/reports/apiDiff/apiDiff.html
 jobs:
   build:
     docker:
@@ -66,7 +65,7 @@ workflows:
           filters:
             branches:
               only:
-                - v3
+                - master
           requires:
             - build
   api-diff:
